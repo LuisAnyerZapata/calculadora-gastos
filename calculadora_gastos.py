@@ -17,7 +17,7 @@ def listar_gastos(lista_gastos):
     print("\n--- Lista de gastos ---")
 
     for gasto in lista_gastos:
-        print(f"Descripción: {gasto['descripcion']}, Importe: {gasto['importe']}, Categoria: {gasto['categoria']}")
+        print(f"Descripción: {gasto['descripcion']}, Importe: {gasto['importe']}, Categoría: {gasto['categoria']}")
 
 def calcular_total(lista_gastos):
     return sum(gasto['importe'] for gasto in lista_gastos)
@@ -53,7 +53,7 @@ def main():
                 print("\n--- Añadir gasto ---")
 
                 while True:
-                    descripcion = input("Ingrese la descripción del gasto: ")
+                    descripcion = input("Ingrese la descripción del gasto: ").strip()
 
                     if descripcion:
                         break
@@ -66,12 +66,12 @@ def main():
                         if importe > 0:
                             break
                         else:
-                            print("El importe no puede ser negativo.")
+                            print("El importe debe ser mayor que cero.")
                     except ValueError:
-                        print("Debe ingresar un número válido. No uses letras ni símbolos.")
+                        print("Debe ingresar un número válido. No use letras ni símbolos.")
 
                 while True:
-                    categoria = input("Ingrese la categoría del gasto: ")
+                    categoria = input("Ingrese la categoría del gasto: ").strip() 
 
                     if categoria:
                         break
@@ -99,14 +99,13 @@ def main():
             case "4": 
                 print("\n--- Filtrar gastos por categoría ---")
 
-                categoria = input("Ingrese la categoría para filtrar: ")
+                categoria = input("Ingrese la categoría para filtrar: ").strip()
                 filtrados = filtrar_por_categoria(lista_gastos, categoria) 
 
                 if not filtrados:
                     print(f"No hay gastos en la categoría '{categoria}'.")
                 else:
-                    for gasto in filtrados:
-                        print(f"Descripción: {gasto['descripcion']}, Importe: {gasto['importe']}, Categoria: {gasto['categoria']}")
+                    listar_gastos(filtrados)
 
                 input("\nPresione Enter para volver al menú...")
 
@@ -115,7 +114,7 @@ def main():
                 print("¡Gracias por usar la calculadora! Saliendo...")
                 break    
             case _:
-                print("Opción no válida. Por favor, elige un número del 1 al 5.")
+                print("Opción no válida. Por favor, seleccione un número del 1 al 5.")
                 input("\nPresione Enter para intentar de nuevo...")
     
 if __name__ == "__main__":
